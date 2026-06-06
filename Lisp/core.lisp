@@ -19,20 +19,7 @@
     )
 )
 
-; intento 1 del requerimiento 4 
-;Guia de lo que pide el trabajo:
-;=========================================================
-;Requerimiento 4: Análisis de Ciclos Semafóricos
-;Para la coordinación y planificación de la vía se necesita calcular cuántos ciclos, transición entre rojo a rojo, se realizarán pasado un determinado tiempo. A la hora de determinar la duración de un ciclo semafórico se acostumbra a tener en cuenta la psicología del conductor, según la cual, ciclos menores de 35 segundos o mayores de 150 segundos se acomodan difícilmente a la mentalidad del usuario de la vía pública, por lo que tienden a evitarse. Por lo que se solicita implementar una función duracion-ciclo que calcule la duración que tendrá cada ciclo con las reglas de negocio actuales y una funcion de recomendacion sobre la duración del ciclo. 
-;Desarrolle funciones para análisis de eficiencia del sistema: 4a. Función duracion-ciclo 
-;Entrada: un número determinado de segundos
-;Propósito: Calcular duración total de un ciclo completo (rojo → amarillo → verde → rojo)
-;Consideración psicológica: Evaluar si la duración está en el rango óptimo (35-150 segundos)
-;4b. Función recomendacion-ciclo
-;Entrada: Duración calculada del ciclo
-;Salida: Recomendación de optimización basada en estándares de ingeniería de tráfico
-;================================================================
-
+; Requerimiento 4 
 =======================
 FUNCION: 
 NATURALEZA: 
@@ -45,8 +32,9 @@ SALIDA:
 =======================
 
 (defun  duracion-Ciclo (tiempos)
-
-;Aca tiene que sumar cuanto dura el verde, el amarillo y el rojo
+(reduce #'+ tiempos) ;voy a ocupar reduce porque quiero un solo resultado final que sume todo lo que le paso por parametro,
+                    ; esta seria la sintaxis(reduce #'funcion lista) podria utilizar mapcar, pero me va a devolver una lista y yo lo que
+                    ;quiero es un resultado unico 
 
 )
 
