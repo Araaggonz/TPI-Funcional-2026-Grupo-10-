@@ -3,6 +3,7 @@
 ; REQUERIMIENTO 1 
 ;orden de transiciones validas rojo=>verde=>amarillo=>rojo
 ;=======================================================
+
 (defun transicion (color-actual cambiar-a)
     (cond
         ((and (eq color-actual 'en-rojo)(eq cambiar-a 'verde))
