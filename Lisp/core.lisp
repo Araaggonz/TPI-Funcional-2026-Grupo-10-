@@ -28,6 +28,28 @@ SALIDA:
         (t (list color-actual 'accion-por-defecto))
     )
 )
+;REQUERINIENTO 2
+;FUNCION: Temporizador
+;NATURALEZA: Pura: dado un determinado tiempo se devuelve el color que corresponde a dicho tiempo
+;ESTRATEGIA: Recursiva:se reduce el tiempo hasta hallar al que color pertenece
+;IMPACTO: No destructiva
+
+;Rojo = 3	Amarrillo = 4	Verde = 6 	Total= 13
+
+(defun Temporizador (tiempo-Unix)
+
+  (cond
+    ((>= tiempo-Unix 13)
+     (Temporizador (- tiempo-Unix 13)))
+
+    ((< tiempo-Unix 4)
+     "rojo")
+
+    ((< tiempo-Unix 7)
+     "amarillo")
+
+    (t
+     "verde")))
 
 ; Requerimiento 4 
 =======================
