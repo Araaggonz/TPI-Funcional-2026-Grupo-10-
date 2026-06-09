@@ -3,16 +3,15 @@
 ; REQUERIMIENTO 1 
 ;orden de transiciones validas rojo=>verde=>amarillo=>rojo
 
-=======================
-FUNCION: 
-NATURALEZA: 
-ESTRATEGIA: 
-IMPACTO:
-----------------------
-ENTRADA: 
-SALIDA: 
-----------------------
-=======================
+
+;FUNCION: 
+;NATURALEZA: 
+;ESTRATEGIA: 
+;IMPACTO:
+
+;ENTRADA: 
+;SALIDA: 
+
 
 (defun transicion (color-actual cambiar-a)
     (cond
@@ -52,16 +51,16 @@ SALIDA:
      "verde")))
 
 ; Requerimiento 4 
-=======================
-FUNCION: 
-NATURALEZA: 
-ESTRATEGIA: 
-IMPACTO:
-----------------------
-ENTRADA: 
-SALIDA: 
-----------------------
-=======================
+;=======================
+;FUNCION: duracion-Ciclo
+;NATURALEZA: Pura (siempre que se le otorgue la misma lista de tiempos retorna la misma duracion)
+;ESTRATEGIA: Funcion de orden superior (reduce)
+;IMPACTO:No destructiva
+;----------------------
+;ENTRADA: lista con las duraciones de las luces del semaforo (ciclo) Ejemplo: '(90, 6, 120)
+;SALIDA: Duracion total del ciclo en segundos  
+;----------------------
+;=======================
 
 (defun  duracion-Ciclo (tiempos)
     (reduce #'+ tiempos) 
@@ -72,18 +71,18 @@ SALIDA:
 
 )
 
-=======================
-FUNCION: 
-NATURALEZA: 
-ESTRATEGIA: 
-IMPACTO:
-----------------------
-ENTRADA: 
-SALIDA: 
-----------------------
-=======================
+;=======================
+;FUNCION: recomendacion-Ciclo
+;NATURALEZA: Pura (siempre que se le de la misma duracion va a retornar la misma recomendacion)
+;ESTRATEGIA: Condicional (cond) 
+;IMPACTO: No destructiva
+;----------------------
+;ENTRADA: Duracion del ciclo en segundos 
+;SALIDA: Recomendacion segun los estandares de ingenieria del trafico (35 a 150 segundos)
+;----------------------
+;=======================
 
-(defun recomendacion ciclo (duracion) ;entra como parametro el resultado de la funcion duracion-ciclo
+(defun recomendacion-Ciclo (duracion) ;entra como parametro el resultado de la funcion duracion-ciclo
 (cond    
     ((<= duracion 35) "Ciclo demasiado corto. Se recomienda aumentar duracion")
     ((>= duracion 150) "Ciclo demasiado largo. Se recomienda disminuir la duracion")
