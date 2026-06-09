@@ -90,3 +90,20 @@
     )
 )
 
+
+
+
+; Requerimiento 5
+; ========================================================
+; FUNCIÓN: ciclos-por-tiempo
+; NATURALEZA: Pura 
+; ESTRATEGIA: Composición Funcional (Combina funciones aritméticas puras para transformar los minutos en ciclos enteros)
+; IMPACTO: No destructiva
+; ========================================================
+
+(defun ciclos-por-tiempo (minutos)
+  (let* ((tiempo-segundos (* minutos 60))
+         (duracion-ciclo (+ 90 6 120))) 
+    ;; values descarta valores secundarios que puedan llegar a mostrarse
+    (values (floor tiempo-segundos duracion-ciclo))))
+
