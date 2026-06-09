@@ -3,15 +3,13 @@
 ; REQUERIMIENTO 1 
 ;orden de transiciones validas rojo=>verde=>amarillo=>rojo
 
+;FUNCION: transicion
+;NATURALEZA: pura(devuelve una lista pero no modifica variables)
+;ESTRATEGIA: se basa en la estructura condicional cond
+;IMPACTO:no destructiva
 
-;FUNCION: 
-;NATURALEZA: 
-;ESTRATEGIA: 
-;IMPACTO:
-
-;ENTRADA: 
-;SALIDA: 
-
+;ENTRADA: color actual del semaforo y al que debe cambiar
+;SALIDA: lista con color actual y confirmacion del color a cambiar en caso de que sea valido
 
 (defun transicion (color-actual cambiar-a)
     (cond
