@@ -48,6 +48,32 @@
     (t
      "verde")))
 
+; Requerimiento 3
+;; ======================================================== 
+;; FUNCIÓN: registrar-cambio 
+;; NATURALEZA: IMPURA (ya que imprime en pantalla)
+;; ESTRATEGIA: Funcion de aplicacion directa (sin recursividad)
+;; IMPACTO: no destructiva (no modifica ningun dato o estructura)
+;; ========================================================
+
+;;MENSAJE TOTALMENTE NECESARIO PARA INCIALIZAR LA FUNCION LOCAL TIME
+(load "C:\\Users\\ramir\\quicklisp\\setup.lisp")
+(ql:quickload :local-time)
+
+(defun registrar-cambio (color-anterior color-nuevo) 
+
+     (if (eq color-anterior color-nuevo) ;;SI LOS COLORES SON IGUALES
+          'COLORES-INCORRECTOS 
+
+          ;;SI LOS COLORES SON DIFERENTES
+      (format t "Tiempo ~A: la luz ha cambiado de ~A a ~A~%" 
+          (local-time:format-timestring nil (local-time:now) ;;DEULVE UN STRING DE LE FECHA FORMATEADA DEL OBJETO TIMESTAMP
+               ;;LOCAL-TIME:NOW UTILIZA EL TIEMPO ACTUAL
+               :format '("[" :year "-" :month "-" :day " " :hour ":" :min ":" :sec "]")) ;;FORMATO PARA MOSTRAR LA FECHA
+          (string-downcase (string color-anterior)) ;;STRING-DOWNCASE CONVIERTE LAS MAYUS DEL STRING EN MINUS
+          (string-downcase (string color-nuevo)))
+      )            
+)
 ; Requerimiento 4 
 ;=======================
 ;FUNCION: duracion-Ciclo
