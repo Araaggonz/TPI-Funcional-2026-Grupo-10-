@@ -10,7 +10,9 @@
 
 ;ENTRADA: color actual del semaforo y al que debe cambiar
 ;SALIDA: lista con color actual y confirmacion del color a cambiar en caso de que sea valido
-
+;ejemplos de prueba: 
+;(transicion 'en-rojo 'verde)
+;(transicion 'en-rojo 'azul)
 (defun transicion (color-actual cambiar-a)
     (cond
         ((and (eq color-actual 'en-rojo)(eq cambiar-a 'verde))
