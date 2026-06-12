@@ -58,23 +58,36 @@
 ;; IMPACTO: no destructiva (no modifica ningun dato o estructura)
 ;; ========================================================
 
+;Codigo de la primera Fase 
+(defun registrar-cambio (epoch color-anterior color-nuevo) 
+     (if (or (<= epoch 0) (eq color-anterior color-nuevo))
+          'ERROR  
+          (format t "Tiempo ~A: la luz ha cambiado de ~A a ~A~%" 
+          epoch
+          (string-downcase (string color-anterior))
+          (string-downcase (string color-nuevo)))
+     )
+  
+)
+
+;Codigo de la segunda Fase (version extendida)
 ;;MENSAJE TOTALMENTE NECESARIO PARA INCIALIZAR LA FUNCION LOCAL TIME
 (load "C:\\Users\\ramir\\quicklisp\\setup.lisp")
 (ql:quickload :local-time)
 
-(defun registrar-cambio (color-anterior color-nuevo) 
-
-     (if (eq color-anterior color-nuevo) ;;SI LOS COLORES SON IGUALES
-          'COLORES-INCORRECTOS 
-
-          ;;SI LOS COLORES SON DIFERENTES
-      (format t "Tiempo ~A: la luz ha cambiado de ~A a ~A~%" 
-          (local-time:format-timestring nil (local-time:now) ;;DEULVE UN STRING DE LE FECHA FORMATEADA DEL OBJETO TIMESTAMP
-               ;;LOCAL-TIME:NOW UTILIZA EL TIEMPO ACTUAL
-               :format '("[" :year "-" :month "-" :day " " :hour ":" :min ":" :sec "]")) ;;FORMATO PARA MOSTRAR LA FECHA
-          (string-downcase (string color-anterior)) ;;STRING-DOWNCASE CONVIERTE LAS MAYUS DEL STRING EN MINUS
+(defun registrar-cambio (epoch color-anterior color-nuevo) 
+     (cond  ;;SI LOS COLORES SON IGUALES O EL TIEMPO ES INCORRECTO
+          ((<= epoch 0) 'ERROR-TIEMPO-INCORRECTO) 
+          ((eq color-anterior color-nuevo) 'ERROR-COLORES-INCORRECTOS)
+          (t (format t "Tiempo ~A: la luz ha cambiado de ~A a ~A~%" ;SI TODO ES VALIDO IMPRIME
+          (local-time:format-timestring nil ;FORMAT-TIMESTRING FORMATEA UN OBJETO TIMESTAMP A STRING LEGIBLE
+                                            ;EL NIL INDICA QUE DEVUELVE UN STRING EN LUGAR DE IMPRIMIR
+               (local-time:unix-to-timestamp epoch) ;UNIX-TO-TIMESTAMP: CONVIERTE A UN OBJETO TIMESTAMP NECESARIO PQ FORMAT-TIMESTRING NO ACEPTA NUMEROS
+               :format '("[" :year "-" :month "-" :day " " :hour ":" :min ":" :sec "]")) ;FORMATO DE SALIDA DE LE FEHCA
+          (string-downcase (string color-anterior)) ;CONVIERTE A MINUSCULAS
           (string-downcase (string color-nuevo)))
-      )            
+          )
+     )
 )
 ; Requerimiento 4 
 ;=======================
@@ -116,9 +129,6 @@
     )
 )
 
-
-
-
 ; Requerimiento 5
 ; ========================================================
 ; FUNCIÓN: ciclos-por-tiempo
@@ -133,3 +143,22 @@
     ;; values descarta valores secundarios que puedan llegar a mostrarse
     (values (floor tiempo-segundos duracion-ciclo))))
 
+;Requerimiento 6
+;; ========================================================
+;; FUNCIÓN: distribucion-temporal
+;; NATURALEZA: Pura (no escribe en pantalla)
+;; ESTRATEGIA: Funcion de orden Superior (utiliza mapcar)
+;; IMPACTO: No destructiva
+;; ========================================================
+
+;Utilizo la funcion de mi compañero duracion-ciclo para la duracion total del ciclo
+(defun distribucion-temporal (tiempos)
+	(mapcar #'(lambda (x y)
+				(when (numberp x)
+						(list y (* (/ x (duracion-ciclo tiempos)) 100.00))
+				)
+			  ) 
+	tiempos
+	'("rojo" "amarillo" "verde")
+	 )
+)
