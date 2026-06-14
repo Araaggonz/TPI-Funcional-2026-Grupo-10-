@@ -33,15 +33,15 @@
 ;ESTRATEGIA: Recursiva:se reduce el tiempo hasta hallar al que color pertenece
 ;IMPACTO: No destructiva
 
-;Rojo = 3	Amarrillo = 4	Verde = 6 	Total= 13
+;Rojo = 90	Amarrillo = 7	Verde = 120 Total= 216
 
 (defun Temporizador (tiempo-Unix)
 
   (cond
-    ((>= tiempo-Unix 13)
+    ((>= tiempo-Unix 217)
      (Temporizador (- tiempo-Unix 13)))
 
-    ((< tiempo-Unix 4)
+    ((< tiempo-Unix 91)
      "rojo")
 
     ((< tiempo-Unix 7)
@@ -188,19 +188,17 @@
 (defun transicion (color-actual cambiar-a)
     (cond
         ((and (eq color-actual 'en-rojo)(eq cambiar-a 'verde))
-        (list color-actual "rojo-intermitente cambiar-a-verde")
+        (list color-actual "rojo-intermitente	cambiar-a-verde")
         )
         ((and (eq color-actual 'en-verde)(eq cambiar-a 'amarillo))
-            (list color-actual "verde-intermitente cambiar-a-amarillo")
+            (list color-actual "verde-intermitente	cambiar-a-amarillo")
         )
         ((and (eq color-actual 'en-amarillo)(eq cambiar-a 'rojo))
-            (list color-actual "amarillo-intermitente cambiar-a-rojo")
+            (list color-actual "amarillo-intermitente	cambiar-a-rojo")
         )
         (t (list color-actual 'error))
     )
 )
-
-
 ;REQUERINIENTO 2
 ;FUNCION: Temporizador
 ;NATURALEZA: Pura: dado un determinado tiempo se devuelve el color que corresponde a dicho tiempo
@@ -235,15 +233,13 @@
     (t
      "error 0800")))
 
-
 ; Requerimiento 3
 ;; ======================================================== 
 ;; FUNCIÓN: registrar-cambio 
 ;; NATURALEZA: IMPURA (ya que imprime en pantalla)
 ;; ESTRATEGIA: Funcion de aplicacion directa (sin recursividad)
 ;; IMPACTO: no destructiva (no modifica ningun dato o estructura)
-;; ========================================================+
-
+;; ========================================================
 
 ;;MENSAJE TOTALMENTE NECESARIO PARA INCIALIZAR LA FUNCION LOCAL TIME
 (load "C:\\Users\\Hogar\\quicklisp\\setup.lisp")
@@ -276,7 +272,7 @@
 ;=======================
 
 (defun  duracion-Ciclo (tiempos)
-    (+ (reduce #'+ tiempos) 9)
+    (reduce #'+ tiempos) 
 
     ;voy a ocupar reduce porque quiero un solo resultado final que sume todo lo que le paso por parametro,
     ; esta seria la sintaxis(reduce #'funcion lista) podria utilizar mapcar, pero me va a devolver una lista y yo lo que
@@ -303,6 +299,8 @@
     ))
 
 
+
+
 ; Requerimiento 5
 ; ========================================================
 ; FUNCIÓN: ciclos-por-tiempo
@@ -311,13 +309,11 @@
 ; IMPACTO: No destructiva
 ; ========================================================
 
-
 (defun ciclos-por-tiempo (minutos)
   (let* ((tiempo-segundos (* minutos 60))
          (duracion-ciclo (+ 90 6 120))) 
     ;; values descarta valores secundarios que puedan llegar a mostrarse
     (values (floor tiempo-segundos duracion-ciclo))))
-
 
 ;Requerimiento 6
 ;; ========================================================
@@ -326,7 +322,6 @@
 ;; ESTRATEGIA: Funcion de orden Superior (utiliza mapcar)
 ;; IMPACTO: No destructiva
 ;; ========================================================
-
 
 ;Utilizo la funcion de mi compañero duracion-ciclo para la duracion total del ciclo
 (defun distribucion-temporal (porcentaje)
@@ -341,119 +336,8 @@
 )
 
 
-;VALIDACION
-
-
-; ========================================================
-; FUNCIÓN: validar-estado2
-; NATURALEZA: Inpura
-; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que el valor ingresado sea igual a alguna de las condiciones de la funcion)
-; IMPACTO: No destructiva
-; ========================================================
-
-
-(defun validar-estados ()
-	(let ((estado (read)))
-		(cond
-			((or (eq estado 'rojo) (eq estado 'amarillo) (eq estado 'verde))
-				estado)
-			(t 
-				(format t "ingrese un estado correcto (rojo amarillo verde) ~%")
-				(validar-estados)))))
-
-
-; ========================================================
-; FUNCIÓN: validar-estado2
-; NATURALEZA: Inpura
-; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que el valor ingresado sea igual a alguna de las condiciones de la funcion)
-; IMPACTO: No destructiva
-; ========================================================
-
-
-(defun validar-estados2 ()
-	(let ((estado (read)))
-		(cond
-			((or (eq estado 'en-rojo) (eq estado 'en-amarillo) (eq estado 'en-verde))
-				estado)
-			(t 
-				(format t "ingrese un estado correcto (en-rojo en-amarillo en-verde) ~%")
-				(validar-estados2)))))
-
-
-; ========================================================
-; FUNCIÓN: validar-numero
-; NATURALEZA: Inpura
-; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que hasta que se cumplan las condiciones)
-; IMPACTO: No destructiva
-; ========================================================
-
-
-(defun validar-numero ()
-	(let ((numero (read)))
-		(cond 
-			((and (integerp numero) (> numero 0))
-				numero)
-		(t 
-			(format t "ingrese un numero entero positivo~%")
-			(validar-numero)))))
-
-
-; ========================================================
-; FUNCIÓN: validar-lista
-; NATURALEZA: Inpura
-; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que hasta que el valor ingresado  cumpla las condiciones (sea lista, y sea un numero entero positivo))
-; IMPACTO: No destructiva
-; ========================================================
-
-
-(defun validar-lista ()
-  (let ((numero (read)))
-    (cond
-      ((not (listp numero))
-       (format t "Ingrese una lista.~%")
-       (validar-lista))
-
-      ((and (= (length numero) 3)
-            (every #'(lambda (x)
-                       (and (integerp x)
-                            (> x 0)))
-                   numero))
-       numero)
-
-      (t
-       (format t "Ingrese una lista de 3 numeros enteros mayores a 0.~%")
-       (validar-lista)))))
-
-
-; ========================================================
-; FUNCIÓN: validar-opcion
-; NATURALEZA: Inpura
-; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que hasta que se cumplan las condiciones)
-; IMPACTO: No destructiva
-; ========================================================
-
-
-(defun validar-opcion ()
-	(let ((opcion (read)))
-		(cond 
-
-			((and (integerp opcion) (and (< opcion 7)(> opcion -1)))
-				opcion)
-			(t 
-				(format t "ingrese un numero del 0 al 6~%")
-				(validar-opcion)))))
-
-
-; ========================================================
-; FUNCIÓN: menu
-; NATURALEZA: Impura
-; ESTRATEGIA: Recursiva (se llama repetidamente a la misma funcion hasta que se ingrese la opcion 0)
-; IMPACTO: No destructiva
-; ========================================================
-
-
-;muestra en pantalla distintas opciones , de las cuales el usuario debera elegir una y ingresar datos relacionados a esa opcion
 (defun menu ()
+	
 	(format t "0. Salir ~%")
 	(format t "1. Requirimiento 1: ~%")
 	(format t "2. Requirimiento 2: ~%")
@@ -463,16 +347,16 @@
 	(format t "6. Requirimiento 6: ~%")
 	
 
-	(let ((opcion (validar-opcion)))
+	(let ((opcion (read)))
 	
 	(cond 
 
 		((= opcion 1)
 			
 			(format t "ingrese el color actual:~%")
-			(let ((color-actual (validar-estados2)))
+			(let ((color-actual (read)))
 			(format t "cambiar-a: ~%")
-			(let ((cambiar-a (validar-estados)))
+			(let ((cambiar-a (read)))
 
 			(format t "~a ~%" (transicion color-actual cambiar-a))))
 			(menu))
@@ -480,44 +364,42 @@
 		((= opcion 2)
 
 			(format t "ingrese el tiempo en segundos(unix): ~%")
-			(let ((tiempo-Unix (validar-numero)))
+			(let ((tiempo-Unix (read)))
 
 			(format t "el color en esos segundos es ~a ~%" (Temporizador tiempo-Unix)))
 			(menu))
 
 		((= opcion 3)
 			(format t "color anterior; ~%")
-			(let ((color-anterior (validar-estados)))
-
+			(let ((color-anterior (read)))
 			(format t "ingrese epoch: ~%")
-			(let ((epoch (validar-numero)))
-
+			(let ((epoch (read)))
 			(format t "color-nuevo: ~%")
-			(let ((color-nuevo (validar-estados)))
+			(let ((color-nuevo (read)))
 
 			(format t "~a ~%" (registrar-cambio epoch color-anterior color-nuevo)))))
 			(menu))
 		
 		((= opcion 4)  
 			(format t "ingrese la duracion de cada estado en formato lista:~%")
-			(let ((tiempos (validar-lista)))
+			(let ((tiempos (read)))
 
-			(format t "la duracion del ciclo es: ~a  se tienen en cuenta los 9 segundos de intermitencia~%" (duracion-Ciclo tiempos))
+			(format t "la duracion del ciclo es: ~a ~%" (duracion-Ciclo tiempos))
 			(format t "~a ~%" (recomendacion-Ciclo (duracion-Ciclo tiempos))))
 			(menu))
 		
 		((= opcion 5)
 			(format t "ingrese el tiempo en minutos:~%")
-			(let ((minutos (validar-numero)))
+			(let ((minutos (read)))
 
 			(format t "la cantidad de ciclos que hay son: ~A ~%" (ciclos-por-tiempo minutos)))
 			(menu))
 
 		((= opcion 6)
 			(format t "ingrese el valor de cada estado de forma ordenada; ~%")
-			(let ((porcentaje (validar-lista)))
+			(let ((porcentaje (read)))
 
-			(format t "~A  ~%" (distribucion-temporal porcentaje)))
+			(format t "~A ~,2f ~%" (distribucion-temporal porcentaje)))
 			(menu))
 		
 		((= opcion 0)
