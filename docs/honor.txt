@@ -11,7 +11,6 @@
 [ ] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo reflejan nuestras propias conclusiones conceptuales.
 [ ] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas en prompts conceptuales proporcionados por el grupo.
 [ ] Generación completa por IA
-Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromiso de honor que las marcas anteriores reflejan fielmente mi participación y la naturaleza del desarrollo de este trabajo práctico. Entiendo que la cátedra cruzará esta declaración con la correcta clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
 
 
 👤 Integrante 2: [Nombre y Apellido] - Usuario GitHub: [Usuario]
@@ -27,7 +26,6 @@ Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromi
 [ ] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo reflejan nuestras propias conclusiones conceptuales.
 [ ] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas en prompts conceptuales proporcionados por el grupo.
 [ ] Generación completa por IA
-Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromiso de honor que las marcas anteriores reflejan fielmente mi participación y la naturaleza del desarrollo de este trabajo práctico. Entiendo que la cátedra cruzará esta declaración con la correcta clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
 
 👤 Integrante 3: [Nombre y Apellido] - Usuario GitHub: [Usuario]
 1. Código en Common Lisp (Fase 1 y 2)
@@ -42,7 +40,7 @@ Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromi
 [ ] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo reflejan nuestras propias conclusiones conceptuales.
 [ ] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas en prompts conceptuales proporcionados por el grupo.
 [ ] Generación completa por IA
-Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromiso de honor que las marcas anteriores reflejan fielmente mi participación y la naturaleza del desarrollo de este trabajo práctico. Entiendo que la cátedra cruzará esta declaración con la correcta clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
+
 
 👤 Integrante 4: [Avril Araceli Gonzalez] - Usuario GitHub: [Araaggonz]
 1. Código en Common Lisp (Fase 1 y 2)
@@ -55,9 +53,9 @@ Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromi
 [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones transicion y timer.
 3. Redacción del Informe y Respuestas Teóricas
 [ ] Autoría Propia: Las explicaciones de los conceptos de los lenguajes y el análisis comparativo reflejan nuestras propias conclusiones conceptuales.
-[ ] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas en prompts conceptuales proporcionados por el grupo.
+[x] Redacción Asistida / Generada: La IA redactó o fundamentó las respuestas teóricas basadas en prompts conceptuales proporcionados por el grupo.
 [ ] Generación completa por IA
-Declaración Jurada: Al subir este archivo al repositorio, declaro bajo compromiso de honor que las marcas anteriores reflejan fielmente mi participación y la naturaleza del desarrollo de este trabajo práctico. Entiendo que la cátedra cruzará esta declaración con la correcta clasificación en comentarios del código y con mi desempeño en la defensa oral/video.
+
 
 👤 Integrante 5: [Nombre y Apellido] - Usuario GitHub: [Usuario]
 1. Código en Common Lisp (Fase 1 y 2)
