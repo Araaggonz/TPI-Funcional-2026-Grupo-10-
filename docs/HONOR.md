@@ -1,1 +1,0 @@
-Declaración de Código de Honor obligatoria

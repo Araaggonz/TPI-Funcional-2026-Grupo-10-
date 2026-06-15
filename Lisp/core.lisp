@@ -96,9 +96,13 @@
 ;ESTRATEGIA: Funcion de orden superior (reduce)
 ;IMPACTO:No destructiva
 ;----------------------
-;ENTRADA: lista con las duraciones de las luces del semaforo (ciclo) Ejemplo: '(90, 6, 120)
+;ENTRADA: lista con las duraciones de las luces del semaforo (ciclo) 
 ;SALIDA: Duracion total del ciclo en segundos  
 ;----------------------
+; Ejemplos: entrada (duracion-ciclo'(90, 6, 120)) 
+;salida: 216
+;entrada (duracion-ciclo'(5, 4, 3)) 
+;salida: 12
 ;=======================
 
 (defun  duracion-Ciclo (tiempos)
@@ -119,6 +123,10 @@
 ;ENTRADA: Duracion del ciclo en segundos 
 ;SALIDA: Recomendacion segun los estandares de ingenieria del trafico (35 a 150 segundos)
 ;----------------------
+;entrada (recomendacion-ciclo 216) 
+;salida: "Ciclo demasiado largo. Se recomienda disminuir la duracion"
+;entrada (recomendacion-ciclo 12) 
+;salida: "Ciclo demasiado corto. Se recomienda aumentar la duracion"
 ;=======================
 
 (defun recomendacion-Ciclo (duracion) ;entra como parametro el resultado de la funcion duracion-ciclo
@@ -574,13 +582,3 @@
 ))
 
 (menu nil)
-
-
-
-
-
-
-
-
-
-
