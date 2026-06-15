@@ -143,11 +143,16 @@
 ; NATURALEZA: Pura 
 ; ESTRATEGIA: Composición Funcional (Combina funciones aritméticas puras para transformar los minutos en ciclos enteros)
 ; IMPACTO: No destructiva
+; Ejemplos de entrada y salida:
+; Entrada 1: (ciclos-por-tiempo 15)
+; Salida 1: 4
+; Entrada 2: (ciclos-por-tiempo 60)
+; Salida: 16
 ; ========================================================
 
 (defun ciclos-por-tiempo (minutos)
   (let* ((tiempo-segundos (* minutos 60))
-         (duracion-ciclo (+ 90 6 120))) 
+         (duracion-ciclo (+ 90 120 6))) 
     ;; values descarta valores secundarios que puedan llegar a mostrarse
     (values (floor tiempo-segundos duracion-ciclo))))
 
