@@ -85,7 +85,7 @@ Conceptos de Paradigmas Aplicados
 
 Integrantes
 *	Biloni de Bianchetti Camila Alejandra 
-*	Caseres Lautaro
+*	Caseres Aguedo Lautaro
 *	Fernando Antonio Daniel Lopez 
 * Gonzalez Avril Araceli
 * Ruben Ramiro Yunes
