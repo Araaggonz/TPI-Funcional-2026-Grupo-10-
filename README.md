@@ -62,8 +62,12 @@ FUNCIONALIDADES ADICIONALES:
 Ejecucion: 
 A)	Cargar Quicklisp
 * (load "ruta/quicklisp/setup.lisp")
-B)	Cargar Local-Time
+
+  
+B)	 Descargar Local-Time sino el codigo produce error
 * (ql:quickload :local-time)
+
+
 C)	Ejecutar el programa
 *	(load "semaforo.lisp")
 *	El menú principal se iniciara automáticamente 
@@ -86,10 +90,4 @@ Integrantes
 * Gonzalez Avril Araceli
 * Ruben Ramiro Yunes
 
-
-
-
-
-
-•	Gonzalez Avril Araceli 
 •	Ruben Yunes Ramiro
