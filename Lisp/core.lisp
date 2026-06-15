@@ -188,17 +188,19 @@
 (defun transicion (color-actual cambiar-a)
     (cond
         ((and (eq color-actual 'en-rojo)(eq cambiar-a 'verde))
-        (list color-actual "rojo-intermitente	cambiar-a-verde")
+        (list color-actual "rojo-intermitente cambiar-a-verde")
         )
         ((and (eq color-actual 'en-verde)(eq cambiar-a 'amarillo))
-            (list color-actual "verde-intermitente	cambiar-a-amarillo")
+            (list color-actual "verde-intermitente cambiar-a-amarillo")
         )
         ((and (eq color-actual 'en-amarillo)(eq cambiar-a 'rojo))
-            (list color-actual "amarillo-intermitente	cambiar-a-rojo")
+            (list color-actual "amarillo-intermitente cambiar-a-rojo")
         )
         (t (list color-actual 'error))
     )
 )
+
+
 ;REQUERINIENTO 2
 ;FUNCION: Temporizador
 ;NATURALEZA: Pura: dado un determinado tiempo se devuelve el color que corresponde a dicho tiempo
@@ -233,13 +235,15 @@
     (t
      "error 0800")))
 
+
 ; Requerimiento 3
 ;; ======================================================== 
 ;; FUNCIÓN: registrar-cambio 
 ;; NATURALEZA: IMPURA (ya que imprime en pantalla)
 ;; ESTRATEGIA: Funcion de aplicacion directa (sin recursividad)
 ;; IMPACTO: no destructiva (no modifica ningun dato o estructura)
-;; ========================================================
+;; ========================================================+
+
 
 ;;MENSAJE TOTALMENTE NECESARIO PARA INCIALIZAR LA FUNCION LOCAL TIME
 (load "C:\\Users\\Hogar\\quicklisp\\setup.lisp")
@@ -247,9 +251,11 @@
 
 (defun registrar-cambio (epoch color-anterior color-nuevo) 
      (cond  ;;SI LOS COLORES SON IGUALES O EL TIEMPO ES INCORRECTO
-          ((<= epoch 0) 'ERROR-TIEMPO-INCORRECTO) 
+          ((<= epoch 0) 'ERROR-TIEMPO-INCORRECTO)
+
           ((eq color-anterior color-nuevo) 'ERROR-COLORES-INCORRECTOS)
-          (t (format t "Tiempo ~A: la luz ha cambiado de ~A a ~A~%" ;SI TODO ES VALIDO IMPRIME
+
+          (t (format nil "Tiempo ~A: la luz ha cambiado de ~A a ~A~%" ;SI TODO ES VALIDO IMPRIME
           (local-time:format-timestring nil ;FORMAT-TIMESTRING FORMATEA UN OBJETO TIMESTAMP A STRING LEGIBLE
                                             ;EL NIL INDICA QUE DEVUELVE UN STRING EN LUGAR DE IMPRIMIR
                (local-time:unix-to-timestamp epoch) ;UNIX-TO-TIMESTAMP: CONVIERTE A UN OBJETO TIMESTAMP NECESARIO PQ FORMAT-TIMESTRING NO ACEPTA NUMEROS
@@ -272,7 +278,7 @@
 ;=======================
 
 (defun  duracion-Ciclo (tiempos)
-    (reduce #'+ tiempos) 
+    (+ (reduce #'+ tiempos) 9)
 
     ;voy a ocupar reduce porque quiero un solo resultado final que sume todo lo que le paso por parametro,
     ; esta seria la sintaxis(reduce #'funcion lista) podria utilizar mapcar, pero me va a devolver una lista y yo lo que
@@ -299,8 +305,6 @@
     ))
 
 
-
-
 ; Requerimiento 5
 ; ========================================================
 ; FUNCIÓN: ciclos-por-tiempo
@@ -309,11 +313,13 @@
 ; IMPACTO: No destructiva
 ; ========================================================
 
+
 (defun ciclos-por-tiempo (minutos)
   (let* ((tiempo-segundos (* minutos 60))
          (duracion-ciclo (+ 90 6 120))) 
     ;; values descarta valores secundarios que puedan llegar a mostrarse
     (values (floor tiempo-segundos duracion-ciclo))))
+
 
 ;Requerimiento 6
 ;; ========================================================
@@ -322,6 +328,7 @@
 ;; ESTRATEGIA: Funcion de orden Superior (utiliza mapcar)
 ;; IMPACTO: No destructiva
 ;; ========================================================
+
 
 ;Utilizo la funcion de mi compañero duracion-ciclo para la duracion total del ciclo
 (defun distribucion-temporal (porcentaje)
@@ -336,8 +343,159 @@
 )
 
 
-(defun menu ()
-	
+;VALIDACION
+
+
+; ========================================================
+; FUNCIÓN: validar-estado2
+; NATURALEZA: Inpura
+; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que el valor ingresado sea igual a alguna de las condiciones de la funcion)
+; IMPACTO: No destructiva
+; ========================================================
+
+
+(defun validar-estados ()
+	(let ((estado (read)))
+		(cond
+			((or (eq estado 'rojo) (eq estado 'amarillo) (eq estado 'verde))
+				estado)
+			(t 
+				(format t "ingrese un estado correcto (rojo amarillo verde) ~%")
+				(validar-estados)))))
+
+
+; ========================================================
+; FUNCIÓN: validar-estado2
+; NATURALEZA: Inpura
+; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que el valor ingresado sea igual a alguna de las condiciones de la funcion)
+; IMPACTO: No destructiva
+; ========================================================
+
+
+(defun validar-estados2 ()
+	(let ((estado (read)))
+		(cond
+			((or (eq estado 'en-rojo) (eq estado 'en-amarillo) (eq estado 'en-verde))
+				estado)
+			(t 
+				(format t "ingrese un estado correcto (en-rojo en-amarillo en-verde) ~%")
+				(validar-estados2)))))
+
+
+; ========================================================
+; FUNCIÓN: validar-numero
+; NATURALEZA: Inpura
+; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que hasta que se cumplan las condiciones)
+; IMPACTO: No destructiva
+; ========================================================
+
+
+(defun validar-numero ()
+	(let ((numero (read)))
+		(cond 
+			((and (integerp numero) (> numero 0))
+				numero)
+		(t 
+			(format t "ingrese un numero entero positivo~%")
+			(validar-numero)))))
+
+
+; ========================================================
+; FUNCIÓN: validar-lista
+; NATURALEZA: Inpura
+; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que hasta que el valor ingresado  cumpla las condiciones (sea lista, y sea un numero entero positivo))
+; IMPACTO: No destructiva
+; ========================================================
+
+
+(defun validar-lista ()
+  (let ((numero (read)))
+    (cond
+      ((not (listp numero))
+       (format t "Ingrese una lista.~%")
+       (validar-lista))
+
+      ((and (= (length numero) 3)
+            (every #'(lambda (x)
+                       (and (integerp x)
+                            (> x 0)))
+                   numero))
+       numero)
+
+      (t
+       (format t "Ingrese una lista de 3 numeros enteros mayores a 0.~%")
+       (validar-lista)))))
+
+
+; ========================================================
+; FUNCIÓN: validar-opcion
+; NATURALEZA: Inpura
+; ESTRATEGIA: Recursiva (se llama repetidamente a la funcion hasta que hasta que se cumplan las condiciones)
+; IMPACTO: No destructiva
+; ========================================================
+
+
+(defun validar-opcion ()
+	(let ((opcion (read)))
+		(cond 
+
+			((and (integerp opcion) (and (< opcion 7)(> opcion -1)))
+				opcion)
+			(t 
+				(format t "ingrese un numero del 0 al 6~%")
+				(validar-opcion)))))
+
+
+;Persistencia de Datos
+
+
+; ========================================================
+; FUNCIÓN: ejecutar-guardar
+; NATURALEZA: Pura no modifica nada
+; ESTRATEGIA: Función con uso de cond 
+; IMPACTO: No destructiva 
+; ========================================================
+
+
+(defun ejecutar-guardar (epoch color-anterior color-nuevo historial)
+	(let ((datos (registrar-cambio epoch color-anterior color-nuevo )))
+
+		(cond 
+			((stringp datos)
+				(cons datos historial))
+			(t historial))))
+
+
+; ========================================================
+; FUNCIÓN: informe
+; NATURALEZA: Impura escribe en un archivo extreno
+; ESTRATEGIA: Función de Orden Superior (utiliza mapcar para escribir los cambios de colores)
+; IMPACTO: No destructiva 
+; ========================================================
+
+
+(defun informe (historial)
+	(with-open-file (stream "informe-ejecucion-semaforo.txt" :direction :output :if-exists :supersede)
+		(format stream "Informe de Ejecucion del Sistema de Semaforo~%")
+		(format stream "=========================================~%")
+
+		(mapcar (lambda (x)
+			(format stream "~a ~%" x))
+		(reverse historial))
+		(format stream "Fin del Informe~%")))
+
+
+
+; ========================================================
+; FUNCIÓN: menu
+; NATURALEZA: Impura
+; ESTRATEGIA: Recursiva (se llama repetidamente a la misma funcion hasta que se ingrese la opcion 0)
+; IMPACTO: No destructiva
+; ========================================================
+
+
+;muestra en pantalla distintas opciones , de las cuales el usuario debera elegir una y ingresar datos relacionados a esa opcion
+(defun menu (historial)
 	(format t "0. Salir ~%")
 	(format t "1. Requirimiento 1: ~%")
 	(format t "2. Requirimiento 2: ~%")
@@ -347,67 +505,76 @@
 	(format t "6. Requirimiento 6: ~%")
 	
 
-	(let ((opcion (read)))
+	(let ((opcion (validar-opcion)))
 	
 	(cond 
+
+		((= opcion 0)
+			(informe historial)
+			(format t "ADIOS")
+			nil)
+	
 
 		((= opcion 1)
 			
 			(format t "ingrese el color actual:~%")
-			(let ((color-actual (read)))
+			(let ((color-actual (validar-estados2)))
 			(format t "cambiar-a: ~%")
-			(let ((cambiar-a (read)))
+			(let ((cambiar-a (validar-estados)))
 
 			(format t "~a ~%" (transicion color-actual cambiar-a))))
-			(menu))
+			(menu historial))
 
 		((= opcion 2)
 
 			(format t "ingrese el tiempo en segundos(unix): ~%")
-			(let ((tiempo-Unix (read)))
+			(let ((tiempo-Unix (validar-numero)))
 
 			(format t "el color en esos segundos es ~a ~%" (Temporizador tiempo-Unix)))
-			(menu))
+			(menu historial))
 
 		((= opcion 3)
-			(format t "color anterior; ~%")
-			(let ((color-anterior (read)))
-			(format t "ingrese epoch: ~%")
-			(let ((epoch (read)))
-			(format t "color-nuevo: ~%")
-			(let ((color-nuevo (read)))
-
-			(format t "~a ~%" (registrar-cambio epoch color-anterior color-nuevo)))))
-			(menu))
+ 			(format t "color anterior: ~%")
+ 			(let ((color-anterior (validar-estados)))
+   				(format t "ingrese epoch: ~%")
+   				(let ((epoch (validar-numero)))
+     			(format t "color-nuevo: ~%")
+     			(let ((color-nuevo (validar-estados)))
+       
+       			(let ((nuevo-historial(ejecutar-guardar epoch color-anterior color-nuevo historial)))
+         		
+         		(format t "~a ~%" (first nuevo-historial))
+        	 (menu nuevo-historial))))))
 		
 		((= opcion 4)  
 			(format t "ingrese la duracion de cada estado en formato lista:~%")
-			(let ((tiempos (read)))
+			(let ((tiempos (validar-lista)))
 
-			(format t "la duracion del ciclo es: ~a ~%" (duracion-Ciclo tiempos))
+			(format t "la duracion del ciclo es: ~a  se tienen en cuenta los 9 segundos de intermitencia~%" (duracion-Ciclo tiempos))
 			(format t "~a ~%" (recomendacion-Ciclo (duracion-Ciclo tiempos))))
-			(menu))
+			(menu historial))
 		
 		((= opcion 5)
 			(format t "ingrese el tiempo en minutos:~%")
-			(let ((minutos (read)))
+			(let ((minutos (validar-numero)))
 
 			(format t "la cantidad de ciclos que hay son: ~A ~%" (ciclos-por-tiempo minutos)))
-			(menu))
+			(menu historial))
 
 		((= opcion 6)
 			(format t "ingrese el valor de cada estado de forma ordenada; ~%")
-			(let ((porcentaje (read)))
+			(let ((porcentaje (validar-lista)))
 
-			(format t "~A ~,2f ~%" (distribucion-temporal porcentaje)))
-			(menu))
+			(format t "~A  ~%" (distribucion-temporal porcentaje)))
+			(menu historial))
+
 		
-		((= opcion 0)
-			(format t "ADIOS"))
-	)
+		)
+
 ))
 
-(menu)
+(menu nil)
+
 
 
 
