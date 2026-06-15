@@ -1,0 +1,79 @@
+;Fase 3: Estudio Comparativo
+;Grupo 10: OCaml
+;OCaml (Objective Caml) es el principal lenguaje de la familia ML (Meta Language). Es un lenguaje de programación imperativo y funcional de propósito general que está orientado a objetos. Se caracteriza por su sistema de tipos estático con inferencia de tipos, lo que permite detectar errores en tiempo de compilación sin necesidad de declarar explícitamente los tipos de las variables y funciones.
+Fue escrito en 1996 por Xavier Leroy y Jérôme Vouillon, Damien Doligez y Didier Rémy en el INRIA de Francia
+Empresas como Meta, Docker y Bloomberg L.P. utilizan OCaml en diferentes ámbitos (por ejemplo, Meta utilizó OCaml para la creación de herramientas como Flow, Hack, Infer y entre otros más)
+
+;FUNCIONES
+
+(* ========================================================
+   REQUERIMIENTO 1: TRANSICION
+   ========================================================
+
+   FUNCION: transicion
+   NATURALEZA:Pura.
+   ESTRATEGIA: Pattern Matching mediante "match ... with".
+   IMPACTO:No destructiva.
+
+   ======================================================== *)
+
+type estado =
+  | EnRojo
+  | EnAmarillo
+  | EnVerde
+
+let transicion color_actual cambiar_a =
+  match (color_actual, cambiar_a) with
+
+  | (EnRojo, "verde") ->
+      (EnRojo, "cambiar-a-verde")
+
+  | (EnVerde, "amarillo") ->
+      (EnVerde, "cambiar-a-amarillo")
+
+  | (EnAmarillo, "rojo") ->
+      (EnAmarillo, "cambiar-a-rojo")
+
+  | _ ->
+      (color_actual, "accion-por-defecto")
+
+(* ========================================================
+   REQUERIMIENTO 2: TEMPORIZADOR
+   ========================================================
+
+   FUNCION: temporizador
+   NATURALEZA: Pura.
+   ESTRATEGIA: Recursiva.
+   IMPACTO: No destructiva.
+
+   CICLO: Rojo      -> 90  segundos - Amarillo  -> 6  segundos - Verde     -> 120 segundos
+   Duración total:
+   216  segundos
+   ======================================================== *)
+
+let rec temporizador tiempo_unix =
+
+  if tiempo_unix >= 216 then
+    temporizador (tiempo_unix - 216)
+
+  else if tiempo_unix < 90 then
+    "rojo"
+
+  else if tiempo_unix < 96 then
+    "amarillo"
+
+  else
+    "verde"
+;;
+
+;En OCaml, la inferencia de tipos asigna automáticamente un tipo de datos a una función sin necesidad de que el programador lo escriba, por lo que no tuvimos la necesidad de declarar explícitamente el tipo porque el compilador sigue verificando estrictamente los tipos. Si se intenta utilizar un argumento de un tipo incompatible, el programa no compilará. Al ejecutarlo, el programa nos muestra lo siguiente: 
+;Ej “transicion”: 
+
+type estado = EnRojo | EnAmarillo | EnVerde
+val transicion : estado -> string -> estado * string = <fun> 
+
+;En Lisp, las estructuras de control como (cond ...) o (if ...) evalúan condiciones lógicas de verdadero/falso. Al ser OCaml un lenguaje "orientado a expresiones", significa que absolutamente todo (incluyendo los condicionales y los bloques match) devuelve un valor. La estructura “match...with” no funciona evaluando "verdadero o falso", sino haciendo Pattern Matching (Pattern Matching es una técnica que permite comparar un dato contra distintos patrones posibles y ejecutar una acción según el patrón que coincida.) sobre la estructura del dato. En OCaml se implementa mediante la estructura “match ... with”, que facilita trabajar con tipos de datos definidos por el usuario y evita el uso de múltiples condicionales anidados. Además, hace que el código sea más legible y fácil de mantener.
+
+;Conclusión: La experiencia de estudiar e implementar la lógica del semáforo en OCaml nos permitió contrastar las diferencias entre un lenguaje de tipado dinámico como Lisp y uno estático como OCaml. A través del desarrollo de la función “transición”, comprobamos cómo la creación de tipos de datos propios como “estado” combinada con la técnica de Pattern Matching ofrece una estructura mucho más robusta y legible que los condicionales de Lisp, obligándonos a cubrir de forma explícita y segura cada escenario posible. Por otra parte, la implementación del “temporizador”, mediante una estrategia recursiva pura, nos demostró cómo el paradigma funcional resulta efectivo para resolver problemas matemáticos continuos manteniendo la naturaleza pura y no destructiva de las funciones. En definitiva, confirmamos que la inferencia de tipos de OCaml elimina la rigidez de tener que declarar datos manualmente y tiene la gran ventaja de que encuentra los errores al compilar, mucho antes de que el código se ponga a ejecutar.
+
+
