@@ -37,6 +37,25 @@ let transicion color_actual cambiar_a =
   | _ ->
       (color_actual, "accion-por-defecto")
 
+   (* --- Pruebas para la función transicion --- *)
+
+(* Caso 1: Transición válida de Rojo a Verde *)
+let transicion1 = transicion EnRojo "verde"
+(* Resultado esperado: (EnRojo, "cambiar-a-verde") *)
+
+(* Caso 2: Transición válida de Verde a Amarillo *)
+let transicion2 = transicion EnVerde "amarillo"
+(* Resultado esperado: (EnVerde, "cambiar-a-amarillo") *)
+
+(* Caso 3: Transición inválida (Rojo a Amarillo no está definido en el match) *)
+let transicion3 = transicion EnRojo "amarillo"
+(* Resultado esperado: (EnRojo, "accion-por-defecto") *)
+
+(* Caso 4: Transición inválida por texto incorrecto *)
+let transicion4 = transicion EnAmarillo "azul"
+(* Resultado esperado: (EnAmarillo, "accion-por-defecto") *)
+
+
 (* ========================================================
    REQUERIMIENTO 2: TEMPORIZADOR
    ========================================================
@@ -65,6 +84,36 @@ let rec temporizador tiempo_unix =
   else
     "verde"
 ;;
+(* --- Pruebas para la función temporizador --- *)
+
+(* Caso 1: Segundo inicial (0s es Rojo) *)
+let timer1 = temporizador 0
+(* Resultado esperado: "rojo" *)
+
+(* Caso 2: Justo antes del cambio (89s sigue siendo Rojo) *)
+let timer2 = temporizador 89
+(* Resultado esperado: "rojo" *)
+
+(* Caso 3: Entra en Amarillo (90s es Amarillo, dura hasta el 95) *)
+let timer3 = temporizador 90
+(* Resultado esperado: "amarillo" *)
+
+(* Caso 4: Entra en Verde (96s en adelante es Verde) *)
+let timer4 = temporizador 96
+(* Resultado esperado: "verde" *)
+
+(* Caso 5: Segundo final del primer ciclo (215s es Verde) *)
+let timer5 = temporizador 215
+(* Resultado esperado: "verde" *)
+
+(* Caso 6: Reinicio de ciclo (216s vuelve a empezar el bucle y da Rojo) *)
+let timer6 = temporizador 216
+(* Resultado esperado: "rojo" *)
+
+(* Caso 7: Un tiempo Unix más alto (440s -> 440 - 216 - 216 = 8s, que es Rojo) *)
+let timer7 = temporizador 440
+(* Resultado esperado: "rojo" *)
+
 
 ;En OCaml, la inferencia de tipos asigna automáticamente un tipo de datos a una función sin necesidad de que el programador lo escriba, por lo que no tuvimos la necesidad de declarar explícitamente el tipo porque el compilador sigue verificando estrictamente los tipos. Si se intenta utilizar un argumento de un tipo incompatible, el programa no compilará. Al ejecutarlo, el programa nos muestra lo siguiente: 
 ;Ej “transicion”: 
