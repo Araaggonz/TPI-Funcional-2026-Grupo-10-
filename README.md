@@ -1,3 +1,5 @@
+
+<img width="1050" height="600" alt="Codec Pro" src="https://github.com/user-attachments/assets/6ea5319b-3980-4fac-85aa-c902579a81c6" />
 #|  Sistemas de Semáforos Inteligentes
 
 Descripción:
