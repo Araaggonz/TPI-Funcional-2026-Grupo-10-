@@ -16,6 +16,10 @@ Objetivos:
 *	Desarrollar autonomía y pensamiento algorítmico: Resolver la integración de herramientas externas y el aprendizaje de una tecnología nueva con el mínimo de asistencia docente.
 *	Análisis Crítico y Metacognición: Evaluar y tipificar las funciones creadas, comprendiendo sus implicancias en la memoria y el flujo de datos, y comparar cómo diferentes lenguajes abordan un mismo problema lógico.
 
+EXTRAS: 
+* Video de Youtube: https://youtu.be/bDmotxObFJs
+* Bitacora: https://docs.google.com/document/d/1scI6OWPF96eoyx2gSrCKEl7tuqA5YO5GETTim1ZFesE/edit?usp=sharing
+
 
 Tecnologías utilizadas: 
 *	Common Lisp 
