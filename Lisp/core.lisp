@@ -32,7 +32,10 @@
 ;NATURALEZA: Pura: dado un determinado tiempo se devuelve el color que corresponde a dicho tiempo
 ;ESTRATEGIA: Recursiva:se reduce el tiempo hasta hallar al que color pertenece
 ;IMPACTO: No destructiva
-
+;Casos de Prueba:
+;(Temporizador 140)
+;(Temporizador 95)
+;(temporizador 160)
 ;Rojo = 90	Amarrillo = 7	Verde = 120 Total= 216
 
 (defun Temporizador (tiempo-Unix)
@@ -219,6 +222,9 @@
 ;NATURALEZA: Pura: dado un determinado tiempo se devuelve el color que corresponde a dicho tiempo
 ;ESTRATEGIA: Recursiva:se reduce el tiempo hasta hallar al que color pertenece
 ;IMPACTO: No destructiva
+;(Temporizador 140)
+;(Temporizador 95)
+;(temporizador 160)
 
 ;Rojo = 3	Amarrillo = 4	Verde = 6 	Total= 13
 
