@@ -17,7 +17,7 @@ Objetivos:
 *	Análisis Crítico y Metacognición: Evaluar y tipificar las funciones creadas, comprendiendo sus implicancias en la memoria y el flujo de datos, y comparar cómo diferentes lenguajes abordan un mismo problema lógico.
 
 EXTRAS: 
-* Video de Youtube: https://youtu.be/bDmotxObFJs
+* Video de Youtube: https://youtu.be/jzkeFKHgm6U
 * Bitacora: https://docs.google.com/document/d/1scI6OWPF96eoyx2gSrCKEl7tuqA5YO5GETTim1ZFesE/edit?usp=sharing
 
 
