@@ -60,6 +60,17 @@
 ;; ESTRATEGIA: Funcion de aplicacion directa (sin recursividad)
 ;; IMPACTO: no destructiva (no modifica ningun dato o estructura)
 ;; ========================================================
+; Ejemplo 1 - Funcionamiento normal
+;(registrar-cambio 1700000000 'en-rojo 'en-verde)
+; Salida: Tiempo [2023-11-14 22:13:20]: la luz ha cambiado de en-rojo a en-verde
+
+; Ejemplo 2 - Camino alternativo (colores iguales)
+;(registrar-cambio 1700000000 'en-verde 'en-verde)
+; Salida: ERROR-COLORES-INCORRECTOS
+
+; Ejemplo 3 - Error (argumentos incorrectos)
+;(registrar-cambio 123 456 'en-rojo)
+; Salida: STRING: argument 456 should be a string, a symbol or a character
 
 ;Codigo de la primera Fase 
 (defun registrar-cambio (epoch color-anterior color-nuevo) 
@@ -346,7 +357,17 @@
 ;; ESTRATEGIA: Funcion de orden Superior (utiliza mapcar)
 ;; IMPACTO: No destructiva
 ;; ========================================================
+; Ejemplo 1 - Funcionamiento normal
+;(distribucion-temporal '(90 6 120))
+; Salida: (("rojo" 41.666664) ("amarillo" 2.777778) ("verde" 55.555557))
 
+; Ejemplo 2 - Camino alternativo (lista vacía)
+;(distribucion-temporal '())
+; Salida: NIL
+
+; Ejemplo 3 - Error (elemento no numérico)
+;(distribucion-temporal '(90 "hola" 120))
+; Salida: "hola" is not a number
 
 ;Utilizo la funcion de mi compañero duracion-ciclo para la duracion total del ciclo
 (defun distribucion-temporal (porcentaje)
