@@ -98,18 +98,14 @@
 ;;ESTRATEGIA: Funcion de orden superior (reduce)
 ;;IMPACTO:No destructiva
 ;;----------------------
-;;ENTRADA: lista con las duraciones de las luces del semaforo (ciclo) Ejemplo: '(90, 6, 120)
-;;SALIDA: Duracion total del ciclo en segundos  
+;;ENTRADA: lista con las duraciones de las luces del semaforo (ciclo) Ejemplo: '(93, 9, 123)
+;;SALIDA: Duracion total del ciclo en segundos
 ;;----------------------
+;; EJEMPLO: se ingresa '(9o, 6, 120) se resulta 216 y se suman 9 osea se egresa 225
 ;;=======================
 
 (defun  duracion-ciclo (tiempos)
     (+ (reduce #'+ tiempos) 9) ; se agregan 9 segundos que serian los de intermitencia
-
-    ;voy a ocupar reduce porque quiero un solo resultado final que sume todo lo que le paso por parametro,
-    ; esta seria la sintaxis(reduce #'funcion lista) podria utilizar mapcar, pero me va a devolver una lista y yo lo que
-    ;quiero es un resultado unico 
-
 )
 
 ;;=======================
@@ -121,6 +117,7 @@
 ;;ENTRADA: Duracion del ciclo en segundos 
 ;;SALIDA: Recomendacion segun los estandares de ingenieria del trafico (35 a 150 segundos)
 ;;----------------------
+;; Ejemplo: (225 > 150) "Ciclo demasiado largo. Se recomienda dismunuir la duracion"  
 ;;=======================
 
 (defun recomendacion-ciclo (duracion) ;entra como parametro el resultado de la funcion duracion-ciclo
