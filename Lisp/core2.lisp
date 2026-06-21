@@ -5,16 +5,20 @@
 
 ;;Codigo de los requerimientos 1 al 6
 
-;;REQUERIMIENTO 1 
+;; REQUERIMIENTO 1 
 ;;orden de transiciones validas rojo=>verde=>amarillo=>rojo
-
+;; ========================================================
 ;;FUNCION: transicion
 ;;NATURALEZA: pura(devuelve una lista pero no modifica variables)
 ;;ESTRATEGIA: se basa en la estructura condicional cond
 ;;IMPACTO:no destructiva
-
+;; ========================================================
 ;;ENTRADA: color actual del semaforo y al que debe cambiar
 ;;SALIDA: lista con color actual y confirmacion del color a cambiar en caso de que sea valido
+;;ejemplos de prueba con sus respectivas salidas: 
+;;(transicion 'en-rojo 'verde)  ==> (en-rojo rojo-intermitente cambiar-a-verde)
+;;;;(transicion 'en-verde 'armarillo)  ==> (en-verde verde-intermitente cambiar-a-amarillo)
+;;(transicion 'en-rojo 'azul)   ==> (en-rojo accion-por-defecto)
 
 (defun transicion (color-actual cambiar-a)
     (cond
