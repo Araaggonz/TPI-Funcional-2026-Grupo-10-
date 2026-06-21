@@ -41,13 +41,13 @@
 (defun Temporizador (tiempo-Unix)
 
   (cond
-    ((>= tiempo-Unix 217)
-     (Temporizador (- tiempo-Unix 13)))
+    ((>= tiempo-Unix 216)
+     (Temporizador (- tiempo-Unix 216)))
 
-    ((< tiempo-Unix 91)
+    ((< tiempo-Unix 90)
      "rojo")
 
-    ((< tiempo-Unix 7)
+    ((< tiempo-Unix 96)
      "amarillo")
 
     (t
