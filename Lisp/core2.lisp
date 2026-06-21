@@ -41,7 +41,7 @@
 ;;(timer 95)
 ;;(timer 160)
 
-;;Rojo = 90 Amarrillo = 6 Verde = 120 intermitencias = 9   Total= 225
+;;Rojo = 90 Amarillo = 6 Verde = 120 intermitencias = 9   Total= 225
 
 (sb-ext:unlock-package :sb-ext) ; comando necesario para que al ejecutar sbcl no de error
 

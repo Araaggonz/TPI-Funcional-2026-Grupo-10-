@@ -27,7 +27,7 @@
         (t (list color-actual 'accion-por-defecto))
     )
 )
-;;REQUERINIENTO 2
+;;REQUERIMIENTO 2
 ;;FUNCION: Temporizador
 ;;NATURALEZA: Pura: dado un determinado tiempo se devuelve el color que corresponde a dicho tiempo
 ;;ESTRATEGIA: Recursiva:se reduce el tiempo hasta hallar al que color pertenece
@@ -36,7 +36,7 @@
 ;;(timer 140)
 ;;(timer 95)
 ;;(timer 160)
-;;Rojo = 90	Amarrillo = 7	Verde = 120 Total= 216
+;;Rojo = 90	Amarillo = 7	Verde = 120 Total= 216
 
 (defun timer (tiempo-Unix)
 
@@ -87,7 +87,7 @@
 )
 
 ;;Codigo de la segunda Fase (version extendida)
-;;MENSAJE TOTALMENTE NECESARIO PARA INCIALIZAR LA FUNCION LOCAL TIME
+;;MENSAJE TOTALMENTE NECESARIO PARA INICIALIZAR LA FUNCION LOCAL TIME
 (load "C:\\Users\\ramir\\quicklisp\\setup.lisp")
 (ql:quickload :local-time)
 
@@ -99,7 +99,7 @@
           (local-time:format-timestring nil ;FORMAT-TIMESTRING FORMATEA UN OBJETO TIMESTAMP A STRING LEGIBLE
                                             ;EL NIL INDICA QUE DEVUELVE UN STRING EN LUGAR DE IMPRIMIR
                (local-time:unix-to-timestamp epoch) ;UNIX-TO-TIMESTAMP: CONVIERTE A UN OBJETO TIMESTAMP NECESARIO PQ FORMAT-TIMESTRING NO ACEPTA NUMEROS
-               :format '("[" :year "-" :month "-" :day " " :hour ":" :min ":" :sec "]")) ;FORMATO DE SALIDA DE LE FEHCA
+               :format '("[" :year "-" :month "-" :day " " :hour ":" :min ":" :sec "]")) ;FORMATO DE SALIDA DE LA FECHA
           (string-downcase (string color-anterior)) ;CONVIERTE A MINUSCULAS
           (string-downcase (string color-nuevo)))
           )
