@@ -36,7 +36,7 @@
 ;;(timer 140)
 ;;(timer 95)
 ;;(timer 160)
-;;Rojo = 90	Amarillo = 7	Verde = 120 Total= 216
+;;Rojo = 90	Amarillo = 6	Verde = 120 Total= 216
 
 (defun timer (tiempo-Unix)
 
@@ -84,26 +84,6 @@
           (string-downcase (string color-nuevo)))
      )
   
-)
-
-;;Codigo de la segunda Fase (version extendida)
-;;MENSAJE TOTALMENTE NECESARIO PARA INICIALIZAR LA FUNCION LOCAL TIME
-(load "C:\\Users\\ramir\\quicklisp\\setup.lisp")
-(ql:quickload :local-time)
-
-(defun registrar-cambio (epoch color-anterior color-nuevo) 
-     (cond  ;;SI LOS COLORES SON IGUALES O EL TIEMPO ES INCORRECTO
-          ((<= epoch 0) 'ERROR-TIEMPO-INCORRECTO) 
-          ((eq color-anterior color-nuevo) 'ERROR-COLORES-INCORRECTOS)
-          (t (format t "Tiempo ~A: la luz ha cambiado de ~A a ~A~%" ;SI TODO ES VALIDO IMPRIME
-          (local-time:format-timestring nil ;FORMAT-TIMESTRING FORMATEA UN OBJETO TIMESTAMP A STRING LEGIBLE
-                                            ;EL NIL INDICA QUE DEVUELVE UN STRING EN LUGAR DE IMPRIMIR
-               (local-time:unix-to-timestamp epoch) ;UNIX-TO-TIMESTAMP: CONVIERTE A UN OBJETO TIMESTAMP NECESARIO PQ FORMAT-TIMESTRING NO ACEPTA NUMEROS
-               :format '("[" :year "-" :month "-" :day " " :hour ":" :min ":" :sec "]")) ;FORMATO DE SALIDA DE LA FECHA
-          (string-downcase (string color-anterior)) ;CONVIERTE A MINUSCULAS
-          (string-downcase (string color-nuevo)))
-          )
-     )
 )
 ;; Requerimiento 4 
 ;;=======================
