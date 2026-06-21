@@ -1,18 +1,18 @@
-;Codigo de los requerimientos 1 al 6
+;;Codigo de los requerimientos 1 al 6
 
-; REQUERIMIENTO 1 
-;orden de transiciones validas rojo=>verde=>amarillo=>rojo
+;; REQUERIMIENTO 1 
+;;orden de transiciones validas rojo=>verde=>amarillo=>rojo
 
-;FUNCION: transicion
-;NATURALEZA: pura(devuelve una lista pero no modifica variables)
-;ESTRATEGIA: se basa en la estructura condicional cond
-;IMPACTO:no destructiva
+;;FUNCION: transicion
+;;NATURALEZA: pura(devuelve una lista pero no modifica variables)
+;;ESTRATEGIA: se basa en la estructura condicional cond
+;;IMPACTO:no destructiva
 
-;ENTRADA: color actual del semaforo y al que debe cambiar
-;SALIDA: lista con color actual y confirmacion del color a cambiar en caso de que sea valido
-;ejemplos de prueba: 
-;(transicion 'en-rojo 'verde)
-;(transicion 'en-rojo 'azul)
+;;ENTRADA: color actual del semaforo y al que debe cambiar
+;;SALIDA: lista con color actual y confirmacion del color a cambiar en caso de que sea valido
+;;ejemplos de prueba: 
+;;(transicion 'en-rojo 'verde)
+;;(transicion 'en-rojo 'azul)
 (defun transicion (color-actual cambiar-a)
     (cond
         ((and (eq color-actual 'en-rojo)(eq cambiar-a 'verde))
@@ -27,52 +27,54 @@
         (t (list color-actual 'accion-por-defecto))
     )
 )
-;REQUERINIENTO 2
-;FUNCION: Temporizador
-;NATURALEZA: Pura: dado un determinado tiempo se devuelve el color que corresponde a dicho tiempo
-;ESTRATEGIA: Recursiva:se reduce el tiempo hasta hallar al que color pertenece
-;IMPACTO: No destructiva
-;Casos de Prueba:
-;(Temporizador 140)
-;(Temporizador 95)
-;(temporizador 160)
-;Rojo = 90	Amarrillo = 7	Verde = 120 Total= 216
+;;REQUERINIENTO 2
+;;FUNCION: Temporizador
+;;NATURALEZA: Pura: dado un determinado tiempo se devuelve el color que corresponde a dicho tiempo
+;;ESTRATEGIA: Recursiva:se reduce el tiempo hasta hallar al que color pertenece
+;;IMPACTO: No destructiva
+;;Casos de Prueba:
+;;(timer 140)
+;;(timer 95)
+;;(timer 160)
+;;Rojo = 90	Amarrillo = 7	Verde = 120 Total= 216
 
-(defun Temporizador (tiempo-Unix)
+(defun timer (tiempo-Unix)
 
   (cond
     ((>= tiempo-Unix 216)
-     (Temporizador (- tiempo-Unix 216)))
+     (timer (- tiempo-Unix 216)))
 
     ((< tiempo-Unix 90)
      "rojo")
 
-    ((< tiempo-Unix 96)
-     "amarillo")
-
+    ((< tiempo-Unix 210)
+     "verde")
+	  
+	((< tiempo-Unix 216)
+	 "amarillo")
     (t
-     "verde")))
+     "el dato ingresado no es correcto")))
 
-; Requerimiento 3
+;; Requerimiento 3
 ;; ======================================================== 
 ;; FUNCIÓN: registrar-cambio 
 ;; NATURALEZA: IMPURA (ya que imprime en pantalla)
 ;; ESTRATEGIA: Funcion de aplicacion directa (sin recursividad)
 ;; IMPACTO: no destructiva (no modifica ningun dato o estructura)
 ;; ========================================================
-; Ejemplo 1 - Funcionamiento normal
-;(registrar-cambio 1700000000 'en-rojo 'en-verde)
-; Salida: Tiempo [2023-11-14 22:13:20]: la luz ha cambiado de en-rojo a en-verde
+;; Ejemplo 1 - Funcionamiento normal
+;;(registrar-cambio 1700000000 'en-rojo 'en-verde)
+;; Salida: Tiempo [2023-11-14 22:13:20]: la luz ha cambiado de en-rojo a en-verde
 
-; Ejemplo 2 - Camino alternativo (colores iguales)
-;(registrar-cambio 1700000000 'en-verde 'en-verde)
-; Salida: ERROR-COLORES-INCORRECTOS
+;; Ejemplo 2 - Camino alternativo (colores iguales)
+;;(registrar-cambio 1700000000 'en-verde 'en-verde)
+;; Salida: ERROR-COLORES-INCORRECTOS
 
-; Ejemplo 3 - Error (argumentos incorrectos)
-;(registrar-cambio 123 456 'en-rojo)
-; Salida: STRING: argument 456 should be a string, a symbol or a character
+;; Ejemplo 3 - Error (argumentos incorrectos)
+;;(registrar-cambio 123 456 'en-rojo)
+;; Salida: STRING: argument 456 should be a string, a symbol or a character
 
-;Codigo de la primera Fase 
+;;Codigo de la primera Fase 
 (defun registrar-cambio (epoch color-anterior color-nuevo) 
      (if (or (<= epoch 0) (eq color-anterior color-nuevo))
           'ERROR  
@@ -84,7 +86,7 @@
   
 )
 
-;Codigo de la segunda Fase (version extendida)
+;;Codigo de la segunda Fase (version extendida)
 ;;MENSAJE TOTALMENTE NECESARIO PARA INCIALIZAR LA FUNCION LOCAL TIME
 (load "C:\\Users\\ramir\\quicklisp\\setup.lisp")
 (ql:quickload :local-time)
@@ -103,21 +105,21 @@
           )
      )
 )
-; Requerimiento 4 
-;=======================
-;FUNCION: duracion-Ciclo
-;NATURALEZA: Pura (siempre que se le otorgue la misma lista de tiempos retorna la misma duracion)
-;ESTRATEGIA: Funcion de orden superior (reduce)
-;IMPACTO:No destructiva
-;----------------------
-;ENTRADA: lista con las duraciones de las luces del semaforo (ciclo) 
-;SALIDA: Duracion total del ciclo en segundos  
-;----------------------
-; Ejemplos: entrada (duracion-ciclo'(90, 6, 120)) 
-;salida: 216
-;entrada (duracion-ciclo'(5, 4, 3)) 
-;salida: 12
-;=======================
+;; Requerimiento 4 
+;;=======================
+;;FUNCION: duracion-Ciclo
+;;NATURALEZA: Pura (siempre que se le otorgue la misma lista de tiempos retorna la misma duracion)
+;;ESTRATEGIA: Funcion de orden superior (reduce)
+;;IMPACTO:No destructiva
+;;----------------------
+;;ENTRADA: lista con las duraciones de las luces del semaforo (ciclo) 
+;;SALIDA: Duracion total del ciclo en segundos  
+;;----------------------
+;; Ejemplos: entrada (duracion-ciclo'(90, 6, 120)) 
+;;salida: 216
+;;entrada (duracion-ciclo'(5, 4, 3)) 
+;;salida: 12
+;;=======================
 
 (defun  duracion-Ciclo (tiempos)
     (reduce #'+ tiempos) 
@@ -128,20 +130,20 @@
 
 )
 
-;=======================
-;FUNCION: recomendacion-Ciclo
-;NATURALEZA: Pura (siempre que se le de la misma duracion va a retornar la misma recomendacion)
-;ESTRATEGIA: Condicional (cond) 
-;IMPACTO: No destructiva
-;----------------------
-;ENTRADA: Duracion del ciclo en segundos 
-;SALIDA: Recomendacion segun los estandares de ingenieria del trafico (35 a 150 segundos)
-;----------------------
-;entrada (recomendacion-ciclo 216) 
-;salida: "Ciclo demasiado largo. Se recomienda disminuir la duracion"
-;entrada (recomendacion-ciclo 12) 
-;salida: "Ciclo demasiado corto. Se recomienda aumentar la duracion"
-;=======================
+;;=======================
+;;FUNCION: recomendacion-Ciclo
+;;NATURALEZA: Pura (siempre que se le de la misma duracion va a retornar la misma recomendacion)
+;;ESTRATEGIA: Condicional (cond) 
+;;IMPACTO: No destructiva
+;;----------------------
+;;ENTRADA: Duracion del ciclo en segundos 
+;;SALIDA: Recomendacion segun los estandares de ingenieria del trafico (35 a 150 segundos)
+;;----------------------
+;;entrada (recomendacion-ciclo 216) 
+;;salida: "Ciclo demasiado largo. Se recomienda disminuir la duracion"
+;;entrada (recomendacion-ciclo 12) 
+;;salida: "Ciclo demasiado corto. Se recomienda aumentar la duracion"
+;;=======================
 
 (defun recomendacion-Ciclo (duracion) ;entra como parametro el resultado de la funcion duracion-ciclo
 (cond    
@@ -151,17 +153,17 @@
     )
 )
 
-; Requerimiento 5
-; ========================================================
-; FUNCIÓN: ciclos-por-tiempo
-; NATURALEZA: Pura 
-; ESTRATEGIA: Composición Funcional (Combina funciones aritméticas puras para transformar los minutos en ciclos enteros)
-; IMPACTO: No destructiva
-; Ejemplos Casos  de prueba:
-; (ciclos-por-tiempo 15)
-; (ciclos-por-tiempo 60)
-; (ciclos-por-tiempo "diez")
-; ========================================================
+;; Requerimiento 5
+;; ========================================================
+;; FUNCIÓN: ciclos-por-tiempo
+;; NATURALEZA: Pura 
+;; ESTRATEGIA: Composición Funcional (Combina funciones aritméticas puras para transformar los minutos en ciclos enteros)
+;; IMPACTO: No destructiva
+;; Ejemplos Casos  de prueba:
+;; (ciclos-por-tiempo 15)
+;; (ciclos-por-tiempo 60)
+;; (ciclos-por-tiempo "diez")
+;; ========================================================
 
 (defun ciclos-por-tiempo (minutos)
   (let* ((tiempo-segundos (* minutos 60))
