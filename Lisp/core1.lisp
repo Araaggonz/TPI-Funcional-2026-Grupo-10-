@@ -121,12 +121,8 @@
 ;;salida: 12
 ;;=======================
 
-(defun  duracion-Ciclo (tiempos)
-    (reduce #'+ tiempos) 
-
-    ;voy a ocupar reduce porque quiero un solo resultado final que sume todo lo que le paso por parametro,
-    ; esta seria la sintaxis(reduce #'funcion lista) podria utilizar mapcar, pero me va a devolver una lista y yo lo que
-    ;quiero es un resultado unico 
+(defun  duracion-ciclo (tiempos)
+    (reduce #'+ tiempos) ;voy a ocupar reduce porque quiero un solo resultado final que sume todo lo que le paso por parametro, esta seria la sintaxis(reduce #'funcion lista) podria utilizar mapcar, pero me va a devolver una lista y yo lo que quiero es un resultado unico 
 
 )
 
@@ -145,7 +141,7 @@
 ;;salida: "Ciclo demasiado corto. Se recomienda aumentar la duracion"
 ;;=======================
 
-(defun recomendacion-Ciclo (duracion) ;entra como parametro el resultado de la funcion duracion-ciclo
+(defun recomendacion-ciclo (duracion) ;entra como parametro el resultado de la funcion duracion-ciclo
 (cond    
     ((<= duracion 35) "Ciclo demasiado corto. Se recomienda aumentar duracion")
     ((>= duracion 150) "Ciclo demasiado largo. Se recomienda disminuir la duracion")
